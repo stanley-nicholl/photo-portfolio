@@ -63,8 +63,7 @@
     <!-- Portfolio Item Heading -->
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Portfolio Item
-                    <small>Item Subheading</small>
+        <h1 class="page-header">project
                 </h1>
       </div>
     </div>
@@ -74,18 +73,14 @@
     <div class="row">
 
       <div class="col-md-8">
-        <img class="img-responsive" src="http://placehold.it/750x500" alt="">
+        <img id="detail-img" class="img-responsive" src="http://placehold.it/750x500" alt="">
       </div>
 
       <div class="col-md-4">
-        <h3>Photo Title</h3>
-        <p>Description</p>
-        <h3>Camera Settings</h3>
-        <ul>
-          <li>Lorem Ipsum</li>
-          <li>Dolor Sit Amet</li>
-          <li>Consectetur</li>
-          <li>Adipiscing Elit</li>
+        <h3 id="detail-title"></h3>
+        <p id="detail-description"></p>
+        <h4>photo settings</h4>
+        <ul id="detail-camera-settings">
         </ul>
       </div>
 
@@ -96,30 +91,30 @@
     <div class="row">
 
       <div class="col-lg-12">
-        <h3 class="page-header">Additional Photos</h3>
+        <h3 class="page-header">additional projects</h3>
       </div>
 
       <div class="col-sm-3 col-xs-6">
         <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <img id="summary-img-0" class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
                 </a>
       </div>
 
       <div class="col-sm-3 col-xs-6">
         <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <img id="summary-img-1" class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
                 </a>
       </div>
 
       <div class="col-sm-3 col-xs-6">
         <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <img id="summary-img-2" class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
                 </a>
       </div>
 
       <div class="col-sm-3 col-xs-6">
         <a href="#">
-                    <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+                    <img id="summary-img-3" class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
                 </a>
       </div>
 
@@ -132,7 +127,7 @@
     <footer>
       <div class="row">
         <div class="col-lg-12">
-          <p>Copyright &copy; Your Website 2014</p>
+          <p>copyright &copy; a website 2017</p>
         </div>
       </div>
       <!-- /.row -->
@@ -149,11 +144,64 @@
 
   <script>
     var data = [{
-      img: '#',
-      title: 'xxx',
-      description: 'xxx',
-      settings
-    }, ]
+        img: './images/cranes.png',
+        title: 'dinosaurs',
+        description: 'port of seattle cranes towering above the clouds on a foggy thanksgiving evening. the image was snapped from the top of beacon hill.',
+        settings: ['iso: 200', 'aperture: f11', 'shutter: 1/100']
+      },
+      {
+        img: './images/leaving.png',
+        title: 'leaving',
+        description: 'a collaborative project with anna brayton and leah merriam, exploring the use of different artificial lighting effects including gels and multiple lights.',
+        settings: ['iso: 400', 'aperture: f11', 'shutter: 1/200']
+      },
+      {
+        img: './images/friends are dead.png',
+        title: 'dead',
+        description: 'a fun project exploring the technique of long exposure photography. the title of the book was especially fitting for the desired look and feel.',
+        settings: ['iso: 100', 'aperture: f16', 'shutter: 20 seconds']
+      },
+      {
+        img: './images/traffic.png',
+        title: 'commuting',
+        description: "traffic exiting a mariner's game letting out late in the evening. taken from the oft photog visited jose rizal bridge.",
+        settings: ['iso: 600', 'aperture: f15', 'shutter: 4 seconds']
+      },
+    ]
+
+    function initialRenderDetailView() {
+      $('#detail-img').attr('src', data[0]['img']);
+      $('#detail-title').html(data[0]['title']);
+      $('#detail-description').html(data[0]['description']);
+      for (var i = 0; i < data[0]['settings'].length; i++) {
+        $('#detail-camera-settings').append('<li>' + data[0]['settings'][i] + "</li>");
+      }
+      $('#summary-img-0').attr('src', data[0]['img']);
+      $('#summary-img-1').attr('src', data[1]['img']);
+      $('#summary-img-2').attr('src', data[2]['img']);
+      $('#summary-img-3').attr('src', data[3]['img']);
+    }
+
+    function changePictures() {
+
+    }
+
+    $(document).ready(function() {
+      initialRenderDetailView()
+    })
+
+    $('.portfolio-item').click(function(event) {
+      var selectedItem = $(this).attr('id');
+      var selectedID = selectedItem.charAt(selectedItem.length - 1);
+      selectedID = parseInt(selectedID);
+      $('#detail-img').attr('src', data[selectedID]['img']);
+      $('#detail-title').html(data[selectedID]['title']);
+      $('#detail-description').html(data[selectedID]['description']);
+      $('#detail-camera-settings').children().remove();
+      for (var i = 0; i < data[selectedID]['settings'].length; i++) {
+        $('#detail-camera-settings').append('<li>' + data[selectedID]['settings'][i] + "</li>");
+      }
+    })
   </script>
 
 </body>
